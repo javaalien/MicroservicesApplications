@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: SWIGGY-SERVICE-REGISTRY
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+server:
+  port: 8761

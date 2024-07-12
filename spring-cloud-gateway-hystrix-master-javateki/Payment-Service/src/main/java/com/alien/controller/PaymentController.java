@@ -22,7 +22,7 @@ public class PaymentController {
 	private PaymentService paymentService;
 
 	@PostMapping("/doPayment")
-	public Payment doPayment(@RequestBody Payment payment) {
+	public Payment doPayment(@RequestBody Payment payment) throws JsonProcessingException {
 
 		return paymentService.doPayment(payment);
 	}

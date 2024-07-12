@@ -19,13 +19,13 @@ public class PaymentService {
 	@Autowired
 	private PaymentRepository paymentRepository;
 
-	Logger logger = LoggerFactory.getLogger(PaymentService.class);
+	Logger log = LoggerFactory.getLogger(PaymentService.class);
 
-	public Payment doPayment(Payment payment) {
+	public Payment doPayment(Payment payment) throws JsonProcessingException {
 		payment.setPaymentStatus(paymentProcessing());
 
 		payment.setTransactionId(UUID.randomUUID().toString());
-
+		log.info("PaymentService request : {}", new ObjectMapper().writeValueAsString(payment));
 		return paymentRepository.save(payment);
 	}
 
@@ -36,7 +36,7 @@ public class PaymentService {
 
 	public Payment findPaymentHistoryByOrderId(int orderId) throws JsonProcessingException {
 		Payment payment = paymentRepository.findByOrderId(orderId);
-		logger.info("paymentService findPaymentHistoryByOrderId : {}", new ObjectMapper().writeValueAsString(payment));
+		log.info("paymentService findPaymentHistoryByOrderId : {}", new ObjectMapper().writeValueAsString(payment));
 		return payment;
 	}
 
